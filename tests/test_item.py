@@ -25,3 +25,28 @@ def test_calculate_total_price(coll_test_item):
 def test_apply_discount(coll_test_item):
     coll_test_item.apply_discount()
     assert coll_test_item.price == 8000.0
+
+
+def test_attribute_name(coll_test_item):
+    coll_test_item.name = "Смартфон"
+    assert coll_test_item.name == "Смартфон"
+
+
+def test_attribute_name_len10(coll_test_item):
+    coll_test_item.name = "СуперСмартфон"
+    assert coll_test_item.name == "СуперСмарт"
+
+
+def test_instantiate_from_csv():
+    Item.instantiate_from_csv()
+    assert len(Item.all) == 5
+
+    item1 = Item.all[1]
+    assert item1.name == "Ноутбук"
+
+
+def test_string_to_number(coll_test_item):
+    assert coll_test_item.string_to_number('1') == 1
+    assert coll_test_item.string_to_number('2.0') == 2
+    assert coll_test_item.string_to_number('3.4') == 3
+
