@@ -37,6 +37,12 @@ class Item:
         else:
             self.__name = name
 
+    def __str__(self):
+        return f'{self.name}'
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
+
     @classmethod
     def instantiate_from_csv(cls):
         """
@@ -74,10 +80,4 @@ class Item:
         Применяет установленную скидку для конкретного товара.
         """
         self.price = self.price * Item.pay_rate
-
-    # def __str__(self):
-    #     return f'Item = "{self.id_operation}" | date_operation="{self.date_operation}"'
-
-    def __repr__(self):
-        return f'Item (name="{self.name}", price="{self.price}", quantity="{self.quantity}")'
 

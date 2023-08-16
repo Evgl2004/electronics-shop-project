@@ -50,3 +50,11 @@ def test_string_to_number(coll_test_item):
     assert coll_test_item.string_to_number('2.0') == 2
     assert coll_test_item.string_to_number('3.4') == 3
 
+
+def test_str_class_item(coll_test_item):
+    assert str(coll_test_item) == "Смартфон"
+
+
+def test_repr_class_item(coll_test_item):
+    assert repr(coll_test_item) == "Item('Смартфон', 10000, 20)"
+
