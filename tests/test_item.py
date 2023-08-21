@@ -43,6 +43,8 @@ def test_instantiate_from_csv():
 
     item1 = Item.all[1]
     assert item1.name == "Ноутбук"
+    assert item1.price == 1000
+    assert item1.quantity == 3
 
 
 def test_string_to_number(coll_test_item):
@@ -58,3 +60,6 @@ def test_str_class_item(coll_test_item):
 def test_repr_class_item(coll_test_item):
     assert repr(coll_test_item) == "Item('Смартфон', 10000, 20)"
 
+
+def test_add(coll_test_item):
+    assert coll_test_item + coll_test_item == 40
