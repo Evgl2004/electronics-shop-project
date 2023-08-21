@@ -1,5 +1,6 @@
 import csv
 
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -43,6 +44,10 @@ class Item:
     def __repr__(self):
         return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
 
+    def __add__(self, other):
+        if isinstance(other, self.__class__):
+            return self.quantity + other.quantity
+
     @classmethod
     def instantiate_from_csv(cls):
         """
@@ -52,7 +57,7 @@ class Item:
         with open("../src/items.csv", "rt", encoding="windows-1251") as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
-                cls(row["name"], row["price"], row["quantity"])
+                cls(str(row["name"]), float(row["price"]), int(row["quantity"]))
 
     @staticmethod
     def string_to_number(input_str: str):
@@ -80,4 +85,3 @@ class Item:
         Применяет установленную скидку для конкретного товара.
         """
         self.price = self.price * Item.pay_rate
-
