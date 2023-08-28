@@ -1,6 +1,7 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 import pytest
 from src.item import Item
+from src.error import InstantiateCSVError
 
 
 @pytest.fixture
@@ -63,3 +64,19 @@ def test_repr_class_item(coll_test_item):
 
 def test_add(coll_test_item):
     assert coll_test_item + coll_test_item == 40
+
+
+def test_error_file_not_found():
+    # Файл items.csv отсутствует.
+    # FileNotFoundError: Отсутствует файл item.csv
+
+    with pytest.raises(FileNotFoundError, match="Отсутствует файл test.csv"):
+        Item.instantiate_from_csv('test.csv')
+
+
+def test_error_instantiate_csv():
+    # В файле items.csv удалена последняя колонка.
+    # InstantiateCSVError: Файл item.csv поврежден
+
+    with pytest.raises(InstantiateCSVError, match="Файл items_test_err.csv поврежден"):
+        Item.instantiate_from_csv('items_test_err.csv')
